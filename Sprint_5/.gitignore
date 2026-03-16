@@ -1,0 +1,58 @@
+# Virtual Environment
+venv/
+env/
+ENV/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Browser drivers
+chromedriver
+geckodriver
+chromedriver.exe
+geckodriver.exe
+
+# Logs and reports
+*.log
+allure_results/
+
+# Screenshots and debug files
+*.png
+*.html
+debug_*
+step*.png
+after_login.html
+profile_page.html
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# User files - ЭТО ВАЖНО!
+../*
+../../*
+../../../*
+*.bash_history
+*.python_history
+*.viminfo
+NTUSER.DAT*
+ntuser.*
+# Игнорировать все лишние файлы в корне
+*.pyc
+*.png
+*.html
+test_profile_debug.py
+tests_setup.py
+update_*.py
+_init_.py
+
+# Игнорировать файлы пользователя
+../*
+../../*
+../../../*
