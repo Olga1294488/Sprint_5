@@ -6,12 +6,12 @@ class MainPageLocators:
     CONSTRUCTOR_BUTTON = (By.XPATH, "//p[text()='Конструктор']")  # Кнопка "Конструктор" в шапке
     LOGO = (By.XPATH, "//div[contains(@class, 'AppHeader_header__logo')]")  # Логотип Stellar Burgers
     
-    # Разделы конструктора (ИСПРАВЛЕНО - добавлены недостающие атрибуты)
-    BUNS_SECTION = (By.XPATH, "//span[text()='Булки']/parent::div")  # Раздел "Булки"
-    SAUCES_SECTION = (By.XPATH, "//span[text()='Соусы']/parent::div")  # Раздел "Соусы"
-    FILLINGS_SECTION = (By.XPATH, "//span[text()='Начинки']/parent::div")  # Раздел "Начинки"
+ # Разделы конструктора
+    BUNS_SECTION = (By.XPATH, "//span[text()='Булки']/parent::div")
+    SAUCES_SECTION = (By.XPATH, "//span[text()='Соусы']/parent::div") 
+    FILLINGS_SECTION = (By.XPATH, "//span[text()='Начинки']/parent::div")
     
-    # Активный раздел конструктора
+    # Активный раздел
     ACTIVE_SECTION = (By.XPATH, "//div[contains(@class, 'tab_tab_type_current')]")
     
     # Кнопка оформления заказа (появляется после входа)

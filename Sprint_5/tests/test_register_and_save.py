@@ -1,79 +1,40 @@
 import pytest
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-from data import generate_unique_email, generate_random_string, TestData
-import json
+from locators import MainPageLocators, LoginPageLocators, RegistrationPageLocators
+from data import Urls, UserGenerator, RegistrationData
 
 
 class TestRegisterAndSave:
-    """Регистрация нового пользователя и сохранение данных"""
+    """Тесты регистрации с сохранением данных"""
     
-    def test_register_new_user(self, driver):
-        """Регистрация нового пользователя и сохранение данных в файл"""
+    def test_register_new_user(self, driver, user_helper):
+        """Регистрация нового пользователя через хелпер"""
         
-        print("\n🔐 РЕГИСТРАЦИЯ НОВОГО ПОЛЬЗОВАТЕЛЯ")
-        print("=" * 60)
+        # Используем хелпер для регистрации
+        user_data = user_helper.register_new_user()
         
-        # Генерируем уникальные данные
-        user_email = generate_unique_email()
-        user_password = generate_random_string(8)
-        user_name = "Test User"
+        # Проверяем, что пользователь создан
+        assert user_data is not None
+        assert "email" in user_data
+        assert "password" in user_data
+        assert "name" in user_data
         
-        print(f"📧 Email: {user_email}")
-        print(f"🔑 Пароль: {user_password}")
+        # Проверяем, что можно войти с новым пользователем
+        driver.get(Urls.BASE_URL)
         
-        # Открываем сайт
-        driver.get(TestData.BASE_URL)
-        
-        # Переходим на страницу регистрации
         WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//button[text()='Войти в аккаунт']"))
+            EC.element_to_be_clickable(MainPageLocators.LOGIN_TO_ACCOUNT_BUTTON)
         ).click()
         
         WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.XPATH, "//a[text()='Зарегистрироваться']"))
-        ).click()
+            EC.visibility_of_element_located(LoginPageLocators.EMAIL_INPUT)
+        ).send_keys(user_data["email"])
         
-        # Заполняем форму
-        name_input = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//label[text()='Имя']/following-sibling::input"))
-        )
-        name_input.send_keys(user_name)
+        driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(user_data["password"])
+        driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
         
-        email_input = driver.find_element(By.XPATH, "//label[text()='Email']/following-sibling::input")
-        email_input.send_keys(user_email)
-        
-        password_input = driver.find_element(By.XPATH, "//input[@type='password']")
-        password_input.send_keys(user_password)
-        
-        register_btn = driver.find_element(By.XPATH, "//button[text()='Зарегистрироваться']")
-        register_btn.click()
-        
-        # Проверяем, что появилась страница входа
-        login_btn = WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//button[text()='Войти']"))
-        )
-        
-        # Вместо return используем assert для проверки
-        assert login_btn is not None, "Кнопка 'Войти' не появилась после регистрации"
-        assert login_btn.is_displayed(), "Кнопка 'Войти' не отображается на странице"
-        
-        # Сохраняем данные в файл
-        user_data = {
-            "email": user_email,
-            "password": user_password,
-            "name": user_name
-        }
-        
-        with open("test_user.json", "w") as f:
-            json.dump(user_data, f, indent=2)
-        
-        print("\n✅ Регистрация успешна!")
-        print("📁 Данные сохранены в test_user.json")
-        
-        # Проверяем, что файл создался
-        import os
-        assert os.path.exists("test_user.json"), "Файл test_user.json не создан"
-        
-        print("=" * 60)
+        # Проверяем успешный вход
+        assert WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
+        ).is_displayed()
