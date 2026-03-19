@@ -21,38 +21,24 @@ geckodriver.exe
 *.log
 allure_results/
 
-# Screenshots and debug files
+# Screenshots and temp files
 *.png
+*.jpg
+*.jpeg
+*.gif
 *.html
-debug_*
-step*.png
-after_login.html
-profile_page.html
+*.tmp
+*.cache
+*.json
+!test_user.json
+!created_user.json
 
 # System files
 .DS_Store
 Thumbs.db
 desktop.ini
 
-# User files - ЭТО ВАЖНО!
-../*
-../../*
-../../../*
-*.bash_history
-*.python_history
-*.viminfo
-NTUSER.DAT*
-ntuser.*
-# Игнорировать все лишние файлы в корне
-*.pyc
-*.png
-*.html
-test_profile_debug.py
-tests_setup.py
-update_*.py
-_init_.py
-
-# Игнорировать файлы пользователя
-../*
-../../*
+# User home directory - ВАЖНО!
+/../*
+/../../*
 ../../../*
