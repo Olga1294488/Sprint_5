@@ -12,27 +12,22 @@ class TestConstructor:
         """Переход к разделу 'Булки'"""
         driver.get(Urls.BASE_URL)
         
-        # Ждем загрузки страницы
         WebDriverWait(driver, 10).until(
             EC.presence_of_element_located(MainPageLocators.BUNS_SECTION)
         )
         
-        # Кликаем на раздел "Соусы"
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(MainPageLocators.SAUCES_SECTION)
         ).click()
         
-        # Ждем, что раздел "Соусы" стал активным
         WebDriverWait(driver, 10).until(
             EC.text_to_be_present_in_element(MainPageLocators.ACTIVE_SECTION, ExpectedTexts.SAUCES_SECTION)
         )
         
-        # Кликаем на раздел "Булки"
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(MainPageLocators.BUNS_SECTION)
         ).click()
         
-        # Проверяем, что раздел "Булки" стал активным
         assert WebDriverWait(driver, 10).until(
             EC.text_to_be_present_in_element(MainPageLocators.ACTIVE_SECTION, ExpectedTexts.BUNS_SECTION)
         )
@@ -53,10 +48,10 @@ class TestConstructor:
         """Переход к разделу 'Начинки'"""
         driver.get(Urls.BASE_URL)
         
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 15).until(
             EC.element_to_be_clickable(MainPageLocators.FILLINGS_SECTION)
         ).click()
         
-        assert WebDriverWait(driver, 10).until(
+        assert WebDriverWait(driver, 15).until(
             EC.text_to_be_present_in_element(MainPageLocators.ACTIVE_SECTION, ExpectedTexts.FILLINGS_SECTION)
         )

@@ -2,7 +2,7 @@ import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import MainPageLocators, LoginPageLocators, RegistrationPageLocators, ForgotPasswordPageLocators
-from data import Urls, UserData, ExpectedTexts
+from data import Urls, UserData
 
 
 class TestLogin:
@@ -27,6 +27,7 @@ class TestLogin:
         """Вход через кнопку 'Войти в аккаунт' на главной"""
         self.login_user(driver, UserData.EXISTING_USER_EMAIL, UserData.EXISTING_USER_PASSWORD)
         
+        #  ожидание и проверка в одном ассерте
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()
@@ -46,6 +47,7 @@ class TestLogin:
         driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(UserData.EXISTING_USER_PASSWORD)
         driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
         
+        # ожидание и проверка в одном ассерте
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()
@@ -73,6 +75,7 @@ class TestLogin:
         driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(UserData.EXISTING_USER_PASSWORD)
         driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
         
+        # ожидание и проверка в одном ассерте
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()
@@ -100,6 +103,7 @@ class TestLogin:
         driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(UserData.EXISTING_USER_PASSWORD)
         driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
         
+        # ожидание и проверка в одном ассерте
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()

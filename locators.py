@@ -53,5 +53,5 @@ class ForgotPasswordPageLocators:
 
 
 class ErrorMessages:
-    # Сообщения об ошибках
-    INCORRECT_PASSWORD = (By.XPATH, "//p[text()='Некорректный пароль']")  # Ошибка некорректного пароля
+    INCORRECT_PASSWORD = (By.XPATH, "//p[text()='Некорректный пароль']")
+    USER_ALREADY_EXISTS = (By.XPATH, "//p[text()='Такой пользователь уже существует']")
