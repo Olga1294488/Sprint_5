@@ -1,0 +1,2 @@
+# Tests package for Stellar Burgers
+"""Package containing all tests for the Stellar Burgers application"""
