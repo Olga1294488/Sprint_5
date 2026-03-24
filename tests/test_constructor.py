@@ -1,4 +1,4 @@
-import pytest
+﻿import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import MainPageLocators
@@ -6,15 +6,8 @@ from data import Urls, ExpectedTexts
 
 
 class TestConstructor:
-    """Тесты для конструктора бургеров"""
-    
     def test_go_to_buns_section(self, driver):
-        """Переход к разделу 'Булки'"""
         driver.get(Urls.BASE_URL)
-        
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located(MainPageLocators.BUNS_SECTION)
-        )
         
         WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(MainPageLocators.SAUCES_SECTION)
@@ -33,7 +26,6 @@ class TestConstructor:
         )
     
     def test_go_to_sauces_section(self, driver):
-        """Переход к разделу 'Соусы'"""
         driver.get(Urls.BASE_URL)
         
         WebDriverWait(driver, 10).until(
@@ -45,13 +37,12 @@ class TestConstructor:
         )
     
     def test_go_to_fillings_section(self, driver):
-        """Переход к разделу 'Начинки'"""
         driver.get(Urls.BASE_URL)
         
-        WebDriverWait(driver, 15).until(
+        WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable(MainPageLocators.FILLINGS_SECTION)
         ).click()
         
-        assert WebDriverWait(driver, 15).until(
+        assert WebDriverWait(driver, 10).until(
             EC.text_to_be_present_in_element(MainPageLocators.ACTIVE_SECTION, ExpectedTexts.FILLINGS_SECTION)
         )

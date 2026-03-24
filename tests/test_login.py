@@ -6,10 +6,7 @@ from data import Urls, UserData
 
 
 class TestLogin:
-    """Тесты для входа в систему"""
-    
     def login_user(self, driver, email, password):
-        """Вспомогательный метод для входа"""
         driver.get(Urls.BASE_URL)
         
         WebDriverWait(driver, 10).until(
@@ -24,16 +21,12 @@ class TestLogin:
         driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
     
     def test_login_main_page_button(self, driver):
-        """Вход через кнопку 'Войти в аккаунт' на главной"""
         self.login_user(driver, UserData.EXISTING_USER_EMAIL, UserData.EXISTING_USER_PASSWORD)
-        
-        #  ожидание и проверка в одном ассерте
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()
     
     def test_login_personal_account_button(self, driver):
-        """Вход через кнопку 'Личный кабинет'"""
         driver.get(Urls.BASE_URL)
         
         WebDriverWait(driver, 10).until(
@@ -47,13 +40,11 @@ class TestLogin:
         driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(UserData.EXISTING_USER_PASSWORD)
         driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
         
-        # ожидание и проверка в одном ассерте
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()
     
     def test_login_registration_form(self, driver):
-        """Вход через кнопку в форме регистрации"""
         driver.get(Urls.BASE_URL)
         
         WebDriverWait(driver, 10).until(
@@ -75,13 +66,11 @@ class TestLogin:
         driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(UserData.EXISTING_USER_PASSWORD)
         driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
         
-        # ожидание и проверка в одном ассерте
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()
     
     def test_login_forgot_password_form(self, driver):
-        """Вход через кнопку в форме восстановления пароля"""
         driver.get(Urls.BASE_URL)
         
         WebDriverWait(driver, 10).until(
@@ -103,7 +92,6 @@ class TestLogin:
         driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(UserData.EXISTING_USER_PASSWORD)
         driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
         
-        # ожидание и проверка в одном ассерте
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()

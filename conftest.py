@@ -20,4 +20,8 @@ def user_helper(driver):
 @pytest.fixture
 def registered_user(user_helper):
     """Фикстура, создающая зарегистрированного пользователя"""
-    return user_helper.register_new_user()
+    from data import UserGenerator
+    email = UserGenerator.generate_email()
+    password = UserGenerator.generate_password(8)
+    name = UserGenerator.generate_name()
+    return user_helper.register_new_user(email, password, name)
