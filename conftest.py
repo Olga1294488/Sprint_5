@@ -1,6 +1,7 @@
 import pytest
 from browser import get_chrome_driver
 from helpers import UserHelper
+from urls import Urls
 
 
 @pytest.fixture
@@ -25,3 +26,10 @@ def registered_user(user_helper):
     password = UserGenerator.generate_password(8)
     name = UserGenerator.generate_name()
     return user_helper.register_new_user(email, password, name)
+
+@pytest.fixture
+def logged_in_user(user_helper):
+    """Фикстура: залогиненный пользователь"""
+    from data import UserData
+    user_helper.login_user(UserData.EXISTING_USER_EMAIL, UserData.EXISTING_USER_PASSWORD)
+    return user_helper

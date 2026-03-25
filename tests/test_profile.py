@@ -2,8 +2,8 @@ import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import MainPageLocators, LoginPageLocators, ProfilePageLocators
-from data import Urls, UserData
-
+from urls import Urls
+from data import UserData
 
 class TestProfile:
     def login(self, driver):

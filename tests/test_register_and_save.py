@@ -2,7 +2,8 @@ import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import MainPageLocators, LoginPageLocators, ErrorMessages
-from data import Urls, UserGenerator
+from urls import Urls
+from data import UserGenerator
 
 
 class TestRegisterAndSave:

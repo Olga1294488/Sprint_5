@@ -1,7 +1,7 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import MainPageLocators, LoginPageLocators, RegistrationPageLocators
-from data import Urls
+from urls import Urls
 import json
 
 
@@ -57,6 +57,7 @@ class UserHelper:
         return {"email": email, "password": password, "name": name}
     
     def login_user(self, email, password):
+        """Вход существующего пользователя"""
         self.go_to_main_page()
         self.go_to_login_page()
         self.fill_login_form(email, password)

@@ -2,31 +2,21 @@ import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import MainPageLocators, LoginPageLocators, RegistrationPageLocators, ForgotPasswordPageLocators
-from data import Urls, UserData
-
+from urls import Urls
+from data import UserData
 
 class TestLogin:
-    def login_user(self, driver, email, password):
-        driver.get(Urls.BASE_URL)
-        
-        WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable(MainPageLocators.LOGIN_TO_ACCOUNT_BUTTON)
-        ).click()
-        
-        WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located(LoginPageLocators.EMAIL_INPUT)
-        ).send_keys(email)
-        
-        driver.find_element(*LoginPageLocators.PASSWORD_INPUT).send_keys(password)
-        driver.find_element(*LoginPageLocators.LOGIN_BUTTON).click()
+    """Тесты для входа в систему"""
     
-    def test_login_main_page_button(self, driver):
-        self.login_user(driver, UserData.EXISTING_USER_EMAIL, UserData.EXISTING_USER_PASSWORD)
+    def test_login_main_page_button(self, driver, user_helper):
+        """Вход через кнопку 'Войти в аккаунт' на главной"""
+        user_helper.login_user(UserData.EXISTING_USER_EMAIL, UserData.EXISTING_USER_PASSWORD)
         assert WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located(MainPageLocators.ORDER_BUTTON)
         ).is_displayed()
     
     def test_login_personal_account_button(self, driver):
+        """Вход через кнопку 'Личный кабинет'"""
         driver.get(Urls.BASE_URL)
         
         WebDriverWait(driver, 10).until(
@@ -45,6 +35,7 @@ class TestLogin:
         ).is_displayed()
     
     def test_login_registration_form(self, driver):
+        """Вход через кнопку в форме регистрации"""
         driver.get(Urls.BASE_URL)
         
         WebDriverWait(driver, 10).until(
@@ -71,6 +62,7 @@ class TestLogin:
         ).is_displayed()
     
     def test_login_forgot_password_form(self, driver):
+        """Вход через кнопку в форме восстановления пароля"""
         driver.get(Urls.BASE_URL)
         
         WebDriverWait(driver, 10).until(

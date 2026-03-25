@@ -2,8 +2,8 @@ import pytest
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import MainPageLocators, LoginPageLocators, RegistrationPageLocators, ErrorMessages
-from data import Urls, RegistrationData, UserGenerator, ExpectedTexts
-
+from urls import Urls
+from data import RegistrationData, UserGenerator, ExpectedTexts
 
 class TestRegistration:
     def test_successful_registration(self, driver):
